@@ -22,17 +22,26 @@ int get_array[] = {
  1,0,0,0,0,0,0,1,
  1,0,0,0,0,0,0,1,
  0,1,1,1,1,1,1,0};
+
 void setup()
 {
+   Serial.begin(38400);
    ledbegin(0x70, 10);
+   ledmatrixclear();      // clear display
+   setBitmap();
+   writeDisplay();  // write the changes we just made to the display
 }
 
 void loop()
 {
-    ledmatrixclear();      // clear display
-    setBitmap();
-    writeDisplay();  // write the changes we just made to the display
-    delay(500);
+    if(Serial.available()>=63){
+      for(int i=0;i<64;i++)
+        get_array[i] = Serial.read();
+      setBitmap();
+      writeDisplay();  // write the changes we just made to the display
+      ledmatrixclear();      // clear display
+      Serial.flush(); 
+    }
 }
 void setBrightness(uint8_t b) {
   if (b > 15) b = 15;
@@ -58,7 +67,9 @@ void ledbegin(int address, int brightness){
 }
 
 void ledmatrixclear(void) {
-  for (uint8_t i=0; i<8; i++) {
+  for (int i=0; i<64; i++) {
+    //get_array[i] = 0;
+    //bitmap[i] = 0;
     displaybuffer[i] = 0;
   }
 }
