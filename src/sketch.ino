@@ -1,12 +1,5 @@
 #include <Wire.h>
-#define HT16K33_BLINK_CMD 0x80
-#define HT16K33_BLINK_DISPLAYON 0x01
-#define HT16K33_BLINK_OFF 0
-#define HT16K33_BLINK_2HZ  1
-#define HT16K33_BLINK_1HZ  2
-#define HT16K33_BLINK_HALFHZ  3
 #define HT16K33_CMD_BRIGHTNESS 0xE0
-#define SEVENSEG_DIGITS 5
 uint16_t displaybuffer[8]; 
 uint8_t address = 0x70;
 
@@ -21,14 +14,14 @@ int bitmap[] = {
  0,0,0,0,0,0,0,0};//56~63 -> 0-8
 
 int get_array[] = {
- 0,0,1,1,0,1,1,1,
- 0,1,0,0,0,0,0,1,
- 0,0,0,0,0,0,0,1,
- 0,0,0,0,0,0,0,1,
- 0,0,0,0,0,0,0,1,
- 0,0,0,0,0,0,0,1,
- 0,0,0,0,1,0,0,1,
- 1,0,0,0,1,0,0,0};
+ 0,1,1,1,1,1,1,0,
+ 1,0,0,0,0,0,0,1,
+ 1,0,0,0,0,0,0,1,
+ 1,0,0,0,0,0,0,1,
+ 1,0,0,0,0,0,0,1,
+ 1,0,0,0,0,0,0,1,
+ 1,0,0,0,0,0,0,1,
+ 0,1,1,1,1,1,1,0};
 void setup()
 {
    ledbegin(0x70, 10);
