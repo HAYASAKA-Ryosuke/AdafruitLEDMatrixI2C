@@ -16,7 +16,6 @@ def smile():
     ]
     return res
 
-
 def clear_window():
     res = [
         0, 0, 1, 1, 1, 1, 0, 0,
